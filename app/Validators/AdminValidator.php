@@ -7,11 +7,14 @@ use App\Http\Validators\AbstractFormValidator;
 class AdminValidator extends AbstractFormValidator
 {
  
+   
     public function rules()
     {
         $this->rules = [
-                   'name' => 'required',
+                  'email'   => 'required|email',
+                  'password' => 'required|min:6'
          ];
+        return $this->rules;
     }
     
 }

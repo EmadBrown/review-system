@@ -69,7 +69,8 @@
                 </div>
             </div>
         </nav>
-
+        @include('layouts.partials._messages')
+        
         @yield('content')
     </div>
 
