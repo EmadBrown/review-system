@@ -2,9 +2,9 @@
 
  namespace App\Service;
  
- use App\Http\Validators\AbstractFormValidator;
+use App\Admin;
 
-class AdminService extends AbstractFormValidator{
-    
-    
+class AdminService
+ {
+    //
 }
