@@ -10,20 +10,36 @@ use Auth;
 
 class AdminLoginController extends Controller
 {
-    
+    /**
+     *
+     * @var AdminValidator 
+     */
     private $formValidator;
     
+  /**
+   * 
+   * @param AdminValidator $formValidator
+   */
     public function __construct(AdminValidator $formValidator)
     {
       $this->middleware('guest:admin', ['except' => ['logout']]);
       $this->formValidator = $formValidator;
     }
-
+    
+    /**
+     * 
+     * @return view
+     */
     public function showLoginForm()
     {
       return view('auth.admin-login');
     }
-
+    
+    /**
+     * 
+     * @param Request $request
+     * @return view Admin Dashboard
+     */
     public function login(Request $request)
     {
       // Validate the form data
@@ -45,7 +61,11 @@ class AdminLoginController extends Controller
                 // if unsuccessful, then redirect back to the login with the form data
                 return redirect()->back()->withInput($request->only('email', 'remember'));
     }
-
+    
+    /**
+     * 
+     * @return Home page
+     */
     public function logout()
     {
         Auth::guard('admin')->logout();
