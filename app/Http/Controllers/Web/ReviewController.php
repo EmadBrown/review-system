@@ -32,12 +32,21 @@ class ReviewController extends Controller
           $this->formValidator = $formValidator;
           $this->reviewService = $reviewService;
     }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function index() 
+    {
+        return view('pages.index')->withReviews($reviews = $this->reviewService->getData());
+    }
+    
     /**
      * @param Request $request
      */
     public function add(Request $request) 
     {
-         $viewData = [];
          $this->formValidator->validateRequest($request);
         if ($this->formValidator->isValid()) 
         {

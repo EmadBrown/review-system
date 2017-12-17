@@ -33,6 +33,16 @@ class ReviewService{
     }
     
     /**
+     * 
+     * @return array
+     */
+    public function getData()
+    {
+         $data = $this->checkReivewModel::orderBy('created_at'  ,  'desc')->paginate(10);
+         return $data;
+    }
+    
+    /**
      * @param array $data
      * @return array
      */
