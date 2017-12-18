@@ -38,7 +38,7 @@ class ReviewService{
      */
     public function getData()
     {
-         $data = $this->checkReivewModel::orderBy('created_at'  ,  'desc')->paginate(10);
+         $data = $this->checkReivewModel::orderBy('created_at'  ,  'desc')->paginate(5);
          return $data;
     }
     

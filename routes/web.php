@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('pages/index');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Web\ReviewController@index')->name('home');
 
 Route::prefix('admin')->group(function() {
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
