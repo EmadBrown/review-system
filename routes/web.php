@@ -32,5 +32,9 @@ Route::get('/', 'Web\ReviewController@index')->name('home');
 
 Route::group(['prefix' => 'reivew', 'namespace' => 'Web'], function () {
     Route::match(['post' , 'get'] , '/add' , 'ReviewController@add')->name('review.add');
+    
+    Route::middleware('auth:admin')->group( function () {
+         Route::post('/delete/{id}' , 'ReviewController@delete')->name('review.delete');
+    });
 });
 
