@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Validators\ReviewValidator;
 use App\Service\ReviewService;
  use Illuminate\Support\Facades\Session;
+ use App\Service\AdminService;
 
 class ReviewController extends Controller
 {
@@ -20,17 +21,25 @@ class ReviewController extends Controller
     private $reviewService;
     
     /**
+     * @var AdminService 
+     */
+    private $contactAdmin;
+    
+    /**
      * 
      * @param ReviewValidator $formValidator
      * @param ReviewService $reviewService
+     * @param AdminService $contactAdmin
      */
     public function __construct(
           ReviewValidator $formValidator,
-          ReviewService $reviewService
+          ReviewService $reviewService,
+          AdminService $contactAdmin
     )
     {
           $this->formValidator = $formValidator;
           $this->reviewService = $reviewService;
+          $this->contactAdmin = $contactAdmin;
     }
     
     /**
@@ -52,14 +61,14 @@ class ReviewController extends Controller
                 $this->formValidator->validateRequest($request);
                if ($this->formValidator->isValid()) 
                {
-                       $this->reviewService->save($this->formValidator->getData());
+                   $this->contactAdmin->contactAdmin($this->reviewService->save($this->formValidator->getData()));
                        Session::flash('success','The Review has successfully Added.');
                        return redirect()->route('home');
                }
                else   
                 {
                        $errors= $this->formValidator->getErrors();
-                       return redirect()->route('home')->withErrors($errors);
+                       return redirect()->route('review.add')->withErrors($errors);
                }
         }
         else{
