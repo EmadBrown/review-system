@@ -48,7 +48,7 @@
                 <button class="button is-primary">Submit</button>
             </div>
              <div class="control">
-                <button class="button is-text">Cancel</button>
+                <a href="{{ route('home') }}" class="button is-text">Cancel</a>
              </div>
         </div>
 

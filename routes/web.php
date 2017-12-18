@@ -15,8 +15,6 @@ Route::get('/', function () {
     return view('pages/index');
 });
 
-Route::get('/', 'Web\ReviewController@index')->name('home');
-
 Route::prefix('admin')->group(function() {
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
   Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -30,7 +28,9 @@ Route::prefix('admin')->group(function() {
   Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 });
 
+Route::get('/', 'Web\ReviewController@index')->name('home');
+
 Route::group(['prefix' => 'reivew', 'namespace' => 'Web'], function () {
-    Route::post('/add' , 'ReviewController@add')->name('review.add');
+    Route::match(['post' , 'get'] , '/add' , 'ReviewController@add')->name('review.add');
 });
 

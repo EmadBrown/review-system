@@ -47,17 +47,23 @@ class ReviewController extends Controller
      */
     public function add(Request $request) 
     {
-         $this->formValidator->validateRequest($request);
-        if ($this->formValidator->isValid()) 
+        if($request->isMethod ('post'))
         {
-                $this->reviewService->save($this->formValidator->getData());
-                Session::flash('success','The Review has successfully Added.');
-                return redirect()->route('home');
+                $this->formValidator->validateRequest($request);
+               if ($this->formValidator->isValid()) 
+               {
+                       $this->reviewService->save($this->formValidator->getData());
+                       Session::flash('success','The Review has successfully Added.');
+                       return redirect()->route('home');
+               }
+               else   
+                {
+                       $errors= $this->formValidator->getErrors();
+                       return redirect()->route('home')->withErrors($errors);
+               }
         }
-        else   
-         {
-                $errors= $this->formValidator->getErrors();
-                return redirect()->route('home')->withErrors($errors);
+        else{
+            return view('pages.add');
         }
     }
 }

@@ -22,6 +22,8 @@
        
   </footer>
         
+     @include('partials._javascript') 
+     
         @yield('script')
         
 </body>

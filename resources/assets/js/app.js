@@ -8,9 +8,6 @@ Vue.use(Buefy);
 
 import StarRating from 'vue-star-rating'
 
-
-
-
 Vue.component('example', require('./components/example.vue'));
  
 Vue.component('star-rating', StarRating);
@@ -32,8 +29,7 @@ Vue.component('star-rating', StarRating);
     rating: "No Rating Selected",
     currentRating: "No Rating",
     currentSelectedRating: "No Current Rating",
-    boundRating: 3,
-    activeClass: "disabled",
+    boundRating: 3
   }
  });
 

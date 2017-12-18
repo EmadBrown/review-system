@@ -23,6 +23,6 @@
   },
   "dependencies": {
     "vue-template-compiler": "^2.5.3",
-           "vue-star-rating": "^1.5.1"
+    "vue-star-rating": "^1.5.1"
   }
 }
