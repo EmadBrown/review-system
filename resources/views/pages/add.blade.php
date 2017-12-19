@@ -2,7 +2,6 @@
 
 @section('content')
 
-    @include('partials._messages')
     <form action="{{route('review.add')}}" method="POST">
         {{ csrf_field() }}
         <div class="field">

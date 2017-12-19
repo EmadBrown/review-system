@@ -12,7 +12,6 @@ class ReviewService{
     private $reivewModel;
     
     /**
-     * 
      * @param Review $reivewModel
      */
     public function __construct(
@@ -36,9 +35,9 @@ class ReviewService{
      * @param array $data
      * @return array
      */
-    public function save(array $data) 
+    public function save($data) 
     {
-         $filter = $this->reivewModel->create($data);
+         $filter = $this->reivewModel->create($data->all());
         return $filter;
     }
     

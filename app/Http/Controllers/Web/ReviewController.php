@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\Web;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Validators\ReviewValidator;
 use App\Service\ReviewService;
- use Illuminate\Support\Facades\Session;
- use App\Service\AdminService;
+use Illuminate\Support\Facades\Session;
+use App\Service\AdminService;
+use App\Http\Requests\ReviewRequest;
+ 
 
 class ReviewController extends Controller
 {
-    /**
-     * @var ReviewValidator 
-     */
-    private $formValidator;
+
     /**
      * @var ReviewService 
      */
@@ -26,18 +23,14 @@ class ReviewController extends Controller
     private $contactAdmin;
     
     /**
-     * 
-     * @param ReviewValidator $formValidator
      * @param ReviewService $reviewService
      * @param AdminService $contactAdmin
      */
     public function __construct(
-          ReviewValidator $formValidator,
           ReviewService $reviewService,
           AdminService $contactAdmin
     )
     {
-          $this->formValidator = $formValidator;
           $this->reviewService = $reviewService;
           $this->contactAdmin = $contactAdmin;
     }
@@ -52,28 +45,13 @@ class ReviewController extends Controller
     }
     
     /**
-     * @param Request $request
+     * @param ReviewReques $request
      */
-    public function add(Request $request) 
+    public function add(ReviewRequest $request) 
     {
-        if($request->isMethod ('post'))
-        {
-                $this->formValidator->validateRequest($request);
-               if ($this->formValidator->isValid()) 
-               {
-                   $this->contactAdmin->contactAdmin($this->reviewService->save($this->formValidator->getData()));
-                       Session::flash('success','The Review has successfully Added.');
-                       return redirect()->route('home');
-               }
-               else   
-                {
-                       $errors= $this->formValidator->getErrors();
-                       return redirect()->route('review.add')->withErrors($errors);
-               }
-        }
-        else{
-            return view('pages.add');
-        }
+  
+            $this->reviewService->save($request);
+            return redirect()->route('home')->with('status' , 'The Review has successfully Added.');
     }
     
     /**
