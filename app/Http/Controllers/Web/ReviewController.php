@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Service\ReviewService;
-use Illuminate\Support\Facades\Session;
 use App\Service\AdminService;
 use App\Http\Requests\ReviewRequest;
- 
 
 class ReviewController extends Controller
 {
@@ -47,13 +45,21 @@ class ReviewController extends Controller
     /**
      * @param ReviewReques $request
      */
-    public function add(ReviewRequest $request) 
+    public function add(ReviewRequest $request ) 
     {
-  
             $this->reviewService->save($request);
             return redirect()->route('home')->with('status' , 'The Review has successfully Added.');
     }
     
+    /**
+     * 
+     * @return view
+     */
+    public function create()
+    {
+        return view('pages.add');
+    }
+
     /**
      * 
      * @param type $id

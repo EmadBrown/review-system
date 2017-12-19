@@ -15,9 +15,6 @@ Route::get('/', function () {
     return view('pages/index');
 });
 
-Route::get('/add', function () {
-    return view('pages/add');
-});
 
 Route::prefix('admin')->group(function() {
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -35,12 +32,11 @@ Route::prefix('admin')->group(function() {
 Route::get('/', 'Web\ReviewController@index')->name('home');
 
 Route::group(['prefix' => 'reivew', 'namespace' => 'Web'], function () {
-  
-    Route::post('/add' , 'ReviewController@add')->name('review.add');
-    
-    
  
-         Route::post('/delete/{id}' , 'ReviewController@delete')->name('review.delete');
+Route::post( '/add' , 'ReviewController@add')->name('review.add');
+Route::get( '/add' , 'ReviewController@create')->name('review.create');
+ 
+Route::post('/delete/{id}' , 'ReviewController@delete')->name('review.delete');
  
 });
 

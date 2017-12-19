@@ -4,10 +4,7 @@
 
 <div class="columns">
       <div class="column is-12">
-          <form action="{{ route('review.add') }}" method="GET" >
-                {{ csrf_field() }}
-              <button  type="submit" class="button is-primary is-block is-alt is-large column is-3">Add Review</button>
-          </form>
+              <a  href="{{ route('review.add') }}" class="button is-primary is-block is-alt is-large column is-3">Add Review</a>
       </div>
 </div>
 <div id="app">
