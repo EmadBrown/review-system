@@ -8,13 +8,17 @@
 </head>
 <body>
 
-    @include('partials._nav')  
+        @include('partials._nav')  
     
   <section class="container">
       
-    @include('partials._messages')
+        @include('partials._messages')
     
-        @yield('content')     
+        <div id='app'>
+        
+            @yield('content')     
+
+       </div> 
        
   </section>
    
@@ -24,7 +28,7 @@
        
   </footer>
         
-     @include('partials._javascript') 
+        @include('partials._javascript') 
      
         @yield('script')
         

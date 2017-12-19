@@ -6,12 +6,13 @@ window.Vue = require('vue');
 import Buefy from 'buefy'
 Vue.use(Buefy);
 
-import StarRating from 'vue-star-rating'
 
 Vue.component('example', require('./components/example.vue'));
+
+import StarRating from 'vue-star-rating'
  
 Vue.component('star-rating', StarRating);
- 
+
  var app = new Vue({
    el: '#app',
   methods: {

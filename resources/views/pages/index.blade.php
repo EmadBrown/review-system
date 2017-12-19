@@ -7,7 +7,6 @@
               <a  href="{{ route('review.add') }}" class="button is-primary is-block is-alt is-large column is-3">Add Review</a>
       </div>
 </div>
-<div id="app">
  @foreach ($reviews as $review )
    <div class="column is-12">
            <div class="box content">
@@ -31,20 +30,16 @@
                </div>
              </article>
            </div>
-   </div>
  @endforeach
-</div>  
-<!-- Pagination -->
  
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+</div>  
+ 
+<!-- Pagination -->
+ <pagination v-bind:pagedata="tagsData" v-on:page-clicked="getTagsList"></pagination>
+    <nav class="is-centered" role="navigation" aria-label="pagination">
         <a  href="{{$reviews->previousPageUrl()}}" class="pagination-previous">Previous</a>
         <a  href="{{ $reviews->nextPageUrl() }}" class="pagination-next">Next page</a>
-        <ul class="pagination-list">
-            <li><a  href="{{$reviews->previousPageUrl()}}" class="pagination-link" aria-label="Goto page {{$reviews->currentPage() - 1}}">{{$reviews->currentPage() - 1}}</a></li>
-            <li><a class="pagination-link is-current" aria-label="{{$reviews->currentPage()}}" aria-current="page">{{$reviews->currentPage()}}</a></li>
-            <li><a   href="{{ $reviews->nextPageUrl() }}" class="pagination-link {{  $reviews->currentPage() == $reviews->lastPage() ? 'is-invisible'  : ''}} " aria-label="Goto page {{$reviews->currentPage() + 1}}">{{$reviews->currentPage() + 1}}</a></li>
-        </ul>
    </nav>
  
- 
+
 @endsection

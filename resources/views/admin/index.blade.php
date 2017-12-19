@@ -27,7 +27,9 @@
               <th>{{ $review->id }}</th>
               <th>{{ $review->name }}</th>
               <td>{{ $review->description }}</td>
-              <td>{{ $review->rating }}</td>
+                <td> 
+                        <star-rating :show-rating="false"  :rating="{{$review->rating}}" :star-size="10" ></star-rating>
+                </td>
               @if($review->permit == true)
                     <td>
                              <span class="icon has-text-success">
@@ -44,6 +46,13 @@
             </tr>
         @endforeach
     </tbody>
+   
 </table>
-
+<!-- Pagination -->
+ <pagination v-bind:pagedata="tagsData" v-on:page-clicked="getTagsList"></pagination>
+    <nav class="is-centered" role="navigation" aria-label="pagination">
+        <a  href="{{$reviews->previousPageUrl()}}" class="pagination-previous">Previous</a>
+        <a  href="{{ $reviews->nextPageUrl() }}" class="pagination-next">Next page</a>
+   </nav>
+ 
 @endsection

@@ -14,8 +14,12 @@
       
     @include('layouts.partials._messages')
     
-        @yield('content')     
-       
+    <div id='app'>
+        
+         @yield('content')     
+        
+    </div>
+    
   </section>
    
   <footer class="footer">
