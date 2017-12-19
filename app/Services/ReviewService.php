@@ -27,9 +27,20 @@ class ReviewService{
      */
     public function getData()
     {
-         $data = $this->reivewModel::orderBy('created_at'  ,  'desc')->paginate(5);
+         $data = $this->reivewModel::Where('permit' , '=' , 1)->orderBy('created_at'  ,  'desc')->paginate(5);
          return $data;
     }
+    
+    /**
+     * 
+     * @return array 
+     */
+    public function getAdminData()
+    {
+         $data = $this->reivewModel::orderBy('created_at'  ,  'desc')->paginate(10);
+         return $data;
+    }
+    
     
     /**
      * @param array $data

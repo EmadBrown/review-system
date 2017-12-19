@@ -2,27 +2,11 @@
 
  namespace App\Service;
  
- use Mail;
-use App\Admin;
+use Mail;
 
 class AdminService
  {
-    /**
-     *
-     * @var Admin Model 
-     */
-    private $adminModel;
     
-    /**
-     * 
-     * @param Admin $adminModel
-     */
-    public function __construct(
-            Admin $adminModel
-    )
-    {
-        $this->adminModel = $adminModel;
-    }
     /**
      * @param array $review
      * @return array

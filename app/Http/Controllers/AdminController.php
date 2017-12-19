@@ -1,16 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Service\AdminService;
+use App\Service\ReviewService;
 
 class AdminController extends Controller
 {
     /**
-     * Create a new controller instance.
-     * @return void
+     *
+     * @var ReviewService 
      */
-    public function __construct()
+    private $reviewService;
+  
+    /**
+     * 
+     * @param AdminService $reviewService
+     */
+    public function __construct(
+            ReviewService $reviewService
+    )
     {
         $this->middleware('auth:admin');
+        $this->reviewService = $reviewService;
     }
 
     /**
@@ -20,6 +31,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        return view('admin.index')->withReviews($this->reviewService->getAdminData());
     }
 }
