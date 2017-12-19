@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCheckReviewsTable extends Migration
+class AddPermitToReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateCheckReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('check_reviews', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->integer('rating');
-            $table->text('description');
-            $table->timestamps();
+        Schema::table('reviews', function (Blueprint $table) {
+              $table->boolean('permit')->default(false);
         });
     }
 
@@ -29,6 +25,8 @@ class CreateCheckReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('check_reviews');
+        Schema::table('reviews', function (Blueprint $table) {
+              $table->dropColumn('permit');
+        });
     }
 }

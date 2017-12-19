@@ -1,8 +1,7 @@
 <?php
 
  namespace App\Service;
- 
- use App\CheckReview;
+
  use App\Review;
 
 class ReviewService{
@@ -13,23 +12,14 @@ class ReviewService{
     private $reivewModel;
     
     /**
-    
-    /**
-     * @var Check Review Model 
-     */
-    private $checkReivewModel;
-    
-    /**
+     * 
      * @param Review $reivewModel
-     * @param CheckReview $checkReivewModel
      */
     public function __construct(
-        Review $reivewModel,
-        CheckReview $checkReivewModel
+        Review $reivewModel
     )
     {
         $this->reivewModel = $reivewModel;
-        $this->checkReivewModel = $checkReivewModel;
     }
     
     /**
@@ -38,7 +28,7 @@ class ReviewService{
      */
     public function getData()
     {
-         $data = $this->checkReivewModel::orderBy('created_at'  ,  'desc')->paginate(5);
+         $data = $this->reivewModel::orderBy('created_at'  ,  'desc')->paginate(5);
          return $data;
     }
     
@@ -48,7 +38,7 @@ class ReviewService{
      */
     public function save(array $data) 
     {
-         $filter = $this->checkReivewModel->create($data);
+         $filter = $this->reivewModel->create($data);
         return $filter;
     }
     
@@ -58,7 +48,7 @@ class ReviewService{
      */
     public function delete($id)
     {
-        $review = $this->checkReivewModel->findOrFail($id);
+        $review = $this->reivewModel->findOrFail($id);
         return $review->delete();
     }
 }

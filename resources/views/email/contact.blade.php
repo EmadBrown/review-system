@@ -39,7 +39,8 @@
                                                             </td>
                                                               <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
                                                                   
-                                                                  <form method="POST" action="route('review.delete', [$id])" accept-charset="UTF-8">
+                                                                  <form method="POST" action="{{route('review.delete', $id)}}" accept-charset="UTF-8">
+                                                                              {{ csrf_field() }}
                                                                       <button type='submit' class="button button-blue" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16); color: #FFF; display: inline-block; text-decoration: none; -webkit-text-size-adjust: none; background-color: #d82332; border-top: 10px solid #d82332; border-right: 18px solid #d82332; border-bottom: 10px solid #d82332; border-left: 18px solid #d82332;">Delete Review</button>
                                                                     </form>
                                                             </td>
