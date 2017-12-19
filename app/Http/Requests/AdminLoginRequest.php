@@ -25,7 +25,16 @@ class AdminLoginRequest extends FormRequest
     {
         return [
               'email'   => 'required|email',
-              'password' => 'required|min:6'
+              'password' => 'required'
+        ];
+    }
+    
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email is required',
+            'password.required'  => 'Password is required',
+            'email.email'  => 'Please enter a valid email address (Ex: johndoe@domain.com)',
         ];
     }
 }

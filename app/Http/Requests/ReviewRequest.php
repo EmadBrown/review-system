@@ -29,4 +29,15 @@ class ReviewRequest extends FormRequest
             'description' => 'required|min:6'
         ];
     }
+    
+    public function messages()
+    {
+        return [
+            'name.required' => 'A name is required',
+            'name.min' => 'A name should be minimal 3 letter',
+            'rating.required'  => 'Rating is required',
+            'rating.integer'  => 'Rating is required',
+            'description.required'  => 'A review is required'
+        ];
+    }
 }
