@@ -33,4 +33,9 @@ class AdminController extends Controller
     {
         return view('admin.index')->withReviews($this->reviewService->getAdminData());
     }
+    
+//    public function switching()
+//    {
+//        echo 'switching';
+//    }
 }

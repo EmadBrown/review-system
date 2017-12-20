@@ -3,8 +3,12 @@
  namespace App\Service;
 
  use App\Review;
+ use App\Admin;
+ use Notification;
+ use App\Notifications\NewReviewNotification;
 
 class ReviewService{
+    
     
     /**
      * @var Review Model 
@@ -12,13 +16,28 @@ class ReviewService{
     private $reivewModel;
     
     /**
+     * @var Admin Model 
+     */
+    private $adminModel;
+    
+    /**
+     * @var NewReviewNotification
+     */
+    private $newReview;
+    /**
+     * 
      * @param Review $reivewModel
+     * @param NewReviewNotification $newReview
      */
     public function __construct(
-        Review $reivewModel
+        Review $reivewModel,
+        NewReviewNotification  $newReview,
+         Admin $adminModel
     )
     {
         $this->reivewModel = $reivewModel;
+        $this->newReview = $newReview;
+         $this->adminModel = $adminModel;
     }
     
     /**
@@ -49,6 +68,8 @@ class ReviewService{
     public function save($data) 
     {
          $filter = $this->reivewModel->create($data->all());
+//         $this->adminModel->notify(new $this->newReview($filter));
+         Notification::route('mail' , 'ec764e6eda-121801@inbox.mailtrap.io')->notify(new $this->newReview($filter));
         return $filter;
     }
     

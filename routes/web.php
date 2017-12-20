@@ -16,27 +16,31 @@ Route::get('/', function () {
 });
 
 
-Route::prefix('admin')->group(function() {
-  Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-  Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-  Route::get('/', 'AdminController@index')->name('admin.dashboard');
-  Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
+  Route::get('/login', 'AdminLoginController@showLoginForm')->name('admin.login');
+  Route::post('/login', 'AdminLoginController@login')->name('admin.login.submit');
+  Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
 
   // Password reset routes
-  Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-  Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-  Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
-  Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+  Route::post('/password/email', 'AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+  Route::get('/password/reset', 'AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+  Route::post('/password/reset', 'AdminResetPasswordController@reset');
+  Route::get('/password/reset/{token}', 'AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+});
+
+Route::group(['prefix' => 'dashboard'], function () {
+      
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+    Route::post( '/add/{id}' , 'AdminController@switch')->name('dashboard.switch');
+
 });
 
 Route::get('/', 'Web\ReviewController@index')->name('home');
 
 Route::group(['prefix' => 'reivew', 'namespace' => 'Web'], function () {
- 
-Route::post( '/add' , 'ReviewController@add')->name('review.add');
-Route::get( '/add' , 'ReviewController@create')->name('review.create');
- 
-Route::post('/delete/{id}' , 'ReviewController@delete')->name('review.delete');
+    Route::post( '/add' , 'ReviewController@add')->name('review.add');
+    Route::get( '/add' , 'ReviewController@create')->name('review.create');
+    Route::post('/delete/{id}' , 'ReviewController@delete')->name('review.delete');
  
 });
 

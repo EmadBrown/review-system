@@ -10,6 +10,7 @@
                <th><abbr title="Played">Description</abbr></th>
                <th>Rating</th>
                 <th>Premition</th>
+                <th>Switching </th>
         </tr>
     </thead>
     <tfoot>
@@ -19,6 +20,7 @@
               <th><abbr title="Played">Description</abbr></th>
               <th>Rating</th>
                <th>Premition</th>
+             <th>Switching </th>
             </tr>
     </tfoot>
     <tbody>
@@ -31,20 +33,33 @@
                         <star-rating :show-rating="false"  :rating="{{$review->rating}}" :star-size="10" ></star-rating>
                 </td>
               @if($review->permit == true)
-                    <td>
-                             <span class="icon has-text-success">
-                                   <i class="fa fa-check-square"></i>
-                            </span>
-                    </td>
-               @else
-                    <td>
-                            <span class="icon has-text-danger">
-                                <i class="fa fa-ban"></i>
-                            </span>
-                   </td>
-               @endif
-            </tr>
-        @endforeach
+                        <td>
+                                 <span class="icon has-text-success">
+                                       <i class="fa fa-check-square"></i>
+                                </span>
+                        </td>
+                        <th>
+                                <div class="field">
+                                            <input  id="switch " type="checkbox" name="switch'{{$review->id}}'" data-href="{{ route('dashboard.switch') }}" class="switch" checked="on">
+                                            <label for="switch{{ $review->id }}" ></label>
+                                </div>
+                        </th>
+                   @else
+                        <td>
+                                <span class="icon has-text-danger">
+                                    <i class="fa fa-ban"></i>
+                                </span>
+                       </td>
+                        <th>
+                                <div class="field">
+                                            <input  id="switch{{ $review->id }}" type="checkbox" name="switch'{{$review->id}}'"  data-href=" " class="switch" >
+                                            <label for="switch{{ $review->id }}" ></label>
+                                </div>
+                        </th>
+                   @endif
+             
+                </tr>
+            @endforeach
     </tbody>
    
 </table>
@@ -55,4 +70,20 @@
         <a  href="{{ $reviews->nextPageUrl() }}" class="pagination-next">Next page</a>
    </nav>
  
+ 
+
+@endsection
+
+
+@section('script')
+
+<script  type="text/javascript">
+$( document ).ready(function() {
+        
+   alert( "ready!" );
+
+});
+ 
+</script>
+
 @endsection

@@ -6,6 +6,7 @@ window.Vue = require('vue');
 import Buefy from 'buefy'
 Vue.use(Buefy);
 
+import Router from './routes.js'
 
 Vue.component('example', require('./components/example.vue'));
 
@@ -15,6 +16,7 @@ Vue.component('star-rating', StarRating);
 
  var app = new Vue({
    el: '#app',
+   router: Router,
   methods: {
     setRating: function(rating) {
       this.rating = rating ;

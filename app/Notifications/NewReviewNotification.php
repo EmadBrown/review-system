@@ -7,22 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class AdminResetPasswordNotification extends Notification
+class NewReviewNotification extends Notification
 {
     use Queueable;
-    
-    public $token;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-   
-    
-    public function __construct($token)
+    public function __construct()
     {
-        $this->token = $token;
+        //
     }
+
     /**
      * Get the notification's delivery channels.
      *
@@ -33,6 +31,7 @@ class AdminResetPasswordNotification extends Notification
     {
         return ['mail'];
     }
+
     /**
      * Get the mail representation of the notification.
      *
@@ -42,10 +41,11 @@ class AdminResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', route('admin.password.reset' , $this->token ))
-            ->line('If you did not request a password reset, no further action is required.');
+                    ->line('There is a New Review on  the website.')
+                    ->action('View The Review', route('home'))
+                    ->line('Thank you for using our application!');
     }
+
     /**
      * Get the array representation of the notification.
      *
