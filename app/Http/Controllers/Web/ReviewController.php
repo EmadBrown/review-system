@@ -60,14 +60,4 @@ class ReviewController extends Controller
         return view('pages.add');
     }
 
-    /**
-     * 
-     * @param type $id
-     */
-    public function delete($id) 
-    {
-        $this->reviewService->delete($id);
-        
-        return redirect()->route('home');
-    }
 }

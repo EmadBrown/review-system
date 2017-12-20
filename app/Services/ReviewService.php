@@ -6,6 +6,8 @@
  use App\Admin;
  use Notification;
  use App\Notifications\NewReviewNotification;
+ use Illuminate\Support\Facades\Mail;
+ use App\Mail\NewReviewMail;
 
 class ReviewService{
     
@@ -67,11 +69,22 @@ class ReviewService{
      */
     public function save($data) 
     {
-         $filter = $this->reivewModel->create($data->all());
-//         $this->adminModel->notify(new $this->newReview($filter));
-         Notification::route('mail' , 'ec764e6eda-121801@inbox.mailtrap.io')->notify(new $this->newReview($filter));
-        return $filter;
+         $review = $this->reivewModel->create($data->all());
+          Mail::to('emad-33944c@inbox.mailtrap.io')->send(new NewReviewMail($review));
+//         Notification::route('mail' , 'emad-33944c@inbox.mailtrap.io')->notify(new $this->newReview($review));
+        return $review;
     }
+    
+        /**
+     * @param array $data
+     * @return array
+     */
+    public function last() 
+    {
+         $review = $this->reivewModel->latest()->first();
+        return $review;
+    }
+    
     
     /**
      * @param $id

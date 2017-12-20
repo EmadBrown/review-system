@@ -34,6 +34,19 @@ class AdminController extends Controller
         return view('admin.index')->withReviews($this->reviewService->getAdminData());
     }
     
+    
+    /**
+     * 
+     * @param type $id
+     */
+    public function delete($id) 
+    {
+        $this->reviewService->delete($id);
+        
+        return redirect()->route('home');
+    }
+    
+    
 //    public function switching()
 //    {
 //        echo 'switching';

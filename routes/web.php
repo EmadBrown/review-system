@@ -32,6 +32,7 @@ Route::group(['prefix' => 'dashboard'], function () {
       
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::post( '/add/{id}' , 'AdminController@switch')->name('dashboard.switch');
+    Route::post('/delete/{id}' , 'AdminController@delete')->name('review.delete');
 
 });
 
@@ -40,7 +41,6 @@ Route::get('/', 'Web\ReviewController@index')->name('home');
 Route::group(['prefix' => 'reivew', 'namespace' => 'Web'], function () {
     Route::post( '/add' , 'ReviewController@add')->name('review.add');
     Route::get( '/add' , 'ReviewController@create')->name('review.create');
-    Route::post('/delete/{id}' , 'ReviewController@delete')->name('review.delete');
  
 });
 

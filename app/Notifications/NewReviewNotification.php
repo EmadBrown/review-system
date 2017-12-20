@@ -40,10 +40,7 @@ class NewReviewNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('There is a New Review on  the website.')
-                    ->action('View The Review', route('home'))
-                    ->line('Thank you for using our application!');
+        return (new MailMessage)->markdown('mail.email.admin');
     }
 
     /**
