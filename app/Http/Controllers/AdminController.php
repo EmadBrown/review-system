@@ -44,11 +44,12 @@ class AdminController extends Controller
          
         $this->reviewService->permitOn($id);
         
-        if(Route::currentRouteName() == 'review.delete')
+        if(Route::currentRouteName() == 'review.permit')
         {
                 return back();
         }
-        else{
+        else
+        {
                 return "<script>window.close();</script>";
         }
     }
@@ -60,7 +61,7 @@ class AdminController extends Controller
     public function permitOff($id) 
     {
         $this->reviewService->permitOff($id);
-          echo "<script>window.close();</script>";
+        return back();
     }
     
     /**
@@ -75,7 +76,8 @@ class AdminController extends Controller
         {
                 return back();
         }
-        else{
+        else
+        {
                 return "<script>window.close();</script>";
         }
     }
