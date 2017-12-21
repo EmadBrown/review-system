@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Service\AdminService;
 use App\Service\ReviewService;
+ use Route;
 
 class AdminController extends Controller
 {
@@ -34,6 +35,33 @@ class AdminController extends Controller
         return view('admin.index')->withReviews($this->reviewService->getAdminData());
     }
     
+        /**
+     * 
+     * @param type $id
+     */
+    public function permitOn($id) 
+    {
+         
+        $this->reviewService->permitOn($id);
+        
+        if(Route::currentRouteName() == 'review.delete')
+        {
+                return back();
+        }
+        else{
+                return "<script>window.close();</script>";
+        }
+    }
+    
+    /**
+     * 
+     * @param type $id
+     */
+    public function permitOff($id) 
+    {
+        $this->reviewService->permitOff($id);
+          echo "<script>window.close();</script>";
+    }
     
     /**
      * 
@@ -43,12 +71,13 @@ class AdminController extends Controller
     {
         $this->reviewService->delete($id);
         
-        return redirect()->route('home');
+        if(Route::currentRouteName() == 'review.delete')
+        {
+                return back();
+        }
+        else{
+                return "<script>window.close();</script>";
+        }
     }
     
-    
-//    public function switching()
-//    {
-//        echo 'switching';
-//    }
 }

@@ -4,8 +4,6 @@
 
  use App\Review;
  use App\Admin;
- use Notification;
- use App\Notifications\NewReviewNotification;
  use Illuminate\Support\Facades\Mail;
  use App\Mail\NewReviewMail;
 
@@ -23,22 +21,16 @@ class ReviewService{
     private $adminModel;
     
     /**
-     * @var NewReviewNotification
-     */
-    private $newReview;
-    /**
      * 
      * @param Review $reivewModel
      * @param NewReviewNotification $newReview
      */
     public function __construct(
         Review $reivewModel,
-        NewReviewNotification  $newReview,
          Admin $adminModel
     )
     {
         $this->reivewModel = $reivewModel;
-        $this->newReview = $newReview;
          $this->adminModel = $adminModel;
     }
     
@@ -84,7 +76,29 @@ class ReviewService{
          $review = $this->reivewModel->latest()->first();
         return $review;
     }
+    /**
+     * 
+     * @param type $id Review
+     * @return mixed
+     */
+    public function permitOn($id)
+    {
+        $review = $this->reivewModel->findOrFail($id);
+        $review->permit = true;
+        return $review->update();
+    }
     
+    /**
+     * 
+     * @param type $id Review
+     * @return mixed
+     */
+    public function permitOff($id)
+    {
+        $review = $this->reivewModel->findOrFail($id);
+        $review->permit = false;
+        return $review->update();
+    }
     
     /**
      * @param $id

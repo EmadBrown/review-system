@@ -29,6 +29,7 @@ public $review;
      */
     public function build()
     {
-        return $this->markdown('mail.admin.email')->withReview($this->review);
+        $urlDelete = 'delete/'.$this->review->id;
+        return $this->markdown('admin.email')->withReview($this->review)->withUrlDelete($urlDelete);
     }
 }

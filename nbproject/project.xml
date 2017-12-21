@@ -9,6 +9,7 @@
             <word>endcomponent</word>
             <word>endforeach</word>
             <word>endif</word>
+            <word>endslot</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

@@ -31,9 +31,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
 Route::group(['prefix' => 'dashboard'], function () {
       
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
-    Route::post( '/add/{id}' , 'AdminController@switch')->name('dashboard.switch');
-    Route::post('/delete/{id}' , 'AdminController@delete')->name('review.delete');
+    Route::get('/delete/{id}' , 'AdminController@delete')->name('review.delete');
+    Route::get('/permit/{id}' , 'AdminController@permitOn')->name('review.permit');
 
+});
+
+Route::group(['prefix' => 'mail'], function () {
+    
+    Route::get('/delete/{id}' , 'AdminController@delete')->name('review.delete.mail');
+    Route::get('/permit/{id}' , 'AdminController@permitOn')->name('review.permit.mail');
+    
 });
 
 Route::get('/', 'Web\ReviewController@index')->name('home');

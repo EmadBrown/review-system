@@ -6,21 +6,23 @@
     <thead>
         <tr>
                 <th>#</th>
-               <th><abbr title="Position">Name</abbr></th>
-               <th><abbr title="Played">Description</abbr></th>
-               <th>Rating</th>
+                <th><abbr title="Position">Name</abbr></th>
+                <th><abbr title="Played">Description</abbr></th>
+                <th>Rating</th>
                 <th>Premition</th>
                 <th>Switching </th>
+                <th>Delete</th>
         </tr>
     </thead>
     <tfoot>
             <tr>
-              <th>#</th>
-              <th><abbr title="Position">Name</abbr></th>
-              <th><abbr title="Played">Description</abbr></th>
-              <th>Rating</th>
-               <th>Premition</th>
-             <th>Switching </th>
+                <th>#</th>
+                <th><abbr title="Position">Name</abbr></th>
+                <th><abbr title="Played">Description</abbr></th>
+                <th>Rating</th>
+                <th>Premition</th>
+                <th>Switching </th>
+                <th>Delete</th>
             </tr>
     </tfoot>
     <tbody>
@@ -40,7 +42,7 @@
                         </td>
                         <th>
                                 <div class="field">
-                                            <input  id="switch " type="checkbox" name="switch'{{$review->id}}'" data-href="{{ route('dashboard.switch') }}" class="switch" checked="on">
+                                            <input  id="switch " type="checkbox" name="switch'{{$review->id}}'" class="switch" checked="on">
                                             <label for="switch{{ $review->id }}" ></label>
                                 </div>
                         </th>
@@ -57,7 +59,9 @@
                                 </div>
                         </th>
                    @endif
-             
+                        <th>
+                            <a href="{{ route('review.delete', $review->id)}}" class="button is-danger">Delete</a>
+                        </th>
                 </tr>
             @endforeach
     </tbody>
