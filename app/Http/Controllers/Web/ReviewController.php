@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Service\ReviewService;
-use App\Service\AdminService;
 use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
@@ -14,23 +13,15 @@ class ReviewController extends Controller
      * @var ReviewService 
      */
     private $reviewService;
-    
-    /**
-     * @var AdminService 
-     */
-    private $contactAdmin;
-    
+
     /**
      * @param ReviewService $reviewService
-     * @param AdminService $contactAdmin
      */
     public function __construct(
-          ReviewService $reviewService,
-          AdminService $contactAdmin
+          ReviewService $reviewService
     )
     {
           $this->reviewService = $reviewService;
-          $this->contactAdmin = $contactAdmin;
     }
     
     /**

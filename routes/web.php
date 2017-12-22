@@ -10,11 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('pages/index');
-});
-
+ 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
   Route::get('/login', 'AdminLoginController@showLoginForm')->name('admin.login');
@@ -44,9 +40,11 @@ Route::group(['prefix' => 'mail'], function () {
     
 });
 
-Route::get('/', 'Web\ReviewController@index')->name('home');
 
+Route::get('/', 'Web\ReviewController@index')->name('home');
+    
 Route::group(['prefix' => 'reivew', 'namespace' => 'Web'], function () {
+
     Route::post( '/add' , 'ReviewController@add')->name('review.add');
     Route::get( '/add' , 'ReviewController@create')->name('review.create');
  

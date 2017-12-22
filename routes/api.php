@@ -15,8 +15,8 @@ use Illuminate\Http\Request;
  
  
    
-//Route::middleware('auth:api')->group( function () {
-//    
-//    Route::post('/delete/{id}' , 'Api\ReviewApiController@delete');
-//    
-//});
+Route::middleware('api')->group( function () {
+Route::get( '/' , 'Api\ReviewApiController@index')->name('home');
+});
+
+
