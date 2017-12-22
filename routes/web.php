@@ -32,7 +32,8 @@ Route::group(['prefix' => 'dashboard'], function () {
       
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/delete/{id}' , 'AdminController@delete')->name('review.delete');
-    Route::get('/permit/{id}' , 'AdminController@permitOn')->name('review.permit');
+    Route::get('/permit_on/{id}' , 'AdminController@permitOn')->name('review.permit.on');
+    Route::get('/permit_off/{id}' , 'AdminController@permitOff')->name('review.permit.off');
 
 });
 

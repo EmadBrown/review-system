@@ -44,9 +44,9 @@ class AdminController extends Controller
          
         $this->reviewService->permitOn($id);
         
-        if(Route::currentRouteName() == 'review.permit')
+        if(Route::currentRouteName() == 'review.permit.on')
         {
-                return back();
+                return redirect()->back();
         }
         else
         {
@@ -61,7 +61,7 @@ class AdminController extends Controller
     public function permitOff($id) 
     {
         $this->reviewService->permitOff($id);
-        return back();
+        return redirect()->back();
     }
     
     /**

@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('stylesheet')
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
+    
+
+@endsection
+
 @section('content')
 
 <table class="table">
@@ -30,37 +39,37 @@
             <tr>
               <th>{{ $review->id }}</th>
               <th>{{ $review->name }}</th>
-              <td>{{ $review->description }}</td>
-                <td> 
+              <th>{{ $review->description }}</th>
+                <th> 
                         <star-rating :show-rating="false"  :rating="{{$review->rating}}" :star-size="10" ></star-rating>
-                </td>
+                </th>
               @if($review->permit == true)
-                        <td>
+                        <th>
                                  <span class="icon has-text-success">
                                        <i class="fa fa-check-square"></i>
                                 </span>
-                        </td>
+                        </th>
                         <th>
                                 <div class="field">
-                                            <input  id="switch " type="checkbox" name="switch'{{$review->id}}'" class="switch" checked="on">
-                                            <label for="switch{{ $review->id }}" ></label>
+                                            <input  id="{{ $review->id }}" type="checkbox" name="switch" class="switch" checked route="{{ route('review.permit.off' , $review->id) }}">
+                                            <label for="{{ $review->id }}" ></label>
                                 </div>
                         </th>
                    @else
-                        <td>
+                        <th>
                                 <span class="icon has-text-danger">
                                     <i class="fa fa-ban"></i>
                                 </span>
-                       </td>
+                       </th>
                         <th>
                                 <div class="field">
-                                            <input  id="switch{{ $review->id }}" type="checkbox" name="switch'{{$review->id}}'"  data-href=" " class="switch" >
-                                            <label for="switch{{ $review->id }}" ></label>
+                                            <input  id="{{ $review->id }}" type="checkbox" class="switch"  name="switch" route="{{ route('review.permit.on' , $review->id) }}">
+                                            <label for="{{ $review->id }}" ></label>
                                 </div>
                         </th>
                    @endif
                         <th>
-                            <a href="{{ route('review.delete', $review->id)}}" class="button is-danger">Delete</a>
+                            <a href="{{ route('review.delete', $review->id ) }}"  id="deleteReview"  class="button is-danger">Delete</a>
                         </th>
                 </tr>
             @endforeach
@@ -73,21 +82,28 @@
         <a  href="{{$reviews->previousPageUrl()}}" class="pagination-previous">Previous</a>
         <a  href="{{ $reviews->nextPageUrl() }}" class="pagination-next">Next page</a>
    </nav>
- 
- 
+
 
 @endsection
 
-
 @section('script')
+<script type="text/javascript">
+    
+ $(document).ready(function () {
+  
 
-<script  type="text/javascript">
-$( document ).ready(function() {
+    $('input[name="switch"]').on('click',function () {
         
-   alert( "ready!" );
-
+      
+        if ( $(this).is(':checked')) {
+                var route = $(this).attr('route') ;
+                window.location.replace(route);
+        } else {
+             var route = $(this).attr('route') ;
+                window.location.replace(route);
+        }
+    });
 });
- 
 </script>
 
 @endsection

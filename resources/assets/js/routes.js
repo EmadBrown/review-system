@@ -4,7 +4,7 @@ import  VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-import switching from './components/switching.vue';
+import switching from './components/delete.vue';
 
 const router = new VueRouter({
     routes: [

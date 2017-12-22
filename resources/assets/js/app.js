@@ -3,12 +3,19 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// ES6 Modules or TypeScript
+import swal from 'sweetalert2'
+
+ 
+
 import Buefy from 'buefy'
 Vue.use(Buefy);
 
 import Router from './routes.js'
 
 Vue.component('example', require('./components/example.vue'));
+
+Vue.component('delete', require('./components/delete.vue'));
 
 import StarRating from 'vue-star-rating'
  
@@ -26,7 +33,7 @@ Vue.component('star-rating', StarRating);
     },
     setCurrentSelectedRating: function(rating) {
       this.currentSelectedRating = "You have Selected: " + rating + " stars";
-    }
+    },
   },
   data: {
     rating: "No Rating Selected",
