@@ -4,8 +4,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
             integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
-    
 
 @endsection
 
@@ -41,7 +39,7 @@
               <th>{{ $review->name }}</th>
               <th>{{ $review->description }}</th>
                 <th> 
-                        <star-rating :show-rating="false"  :rating="{{$review->rating}}" :star-size="10" ></star-rating>
+                        <star-rating :show-rating="false"  :rating="{{$review->rating}}" :star-size="15" ></star-rating>
                 </th>
               @if($review->permit == true)
                         <th>
@@ -51,7 +49,7 @@
                         </th>
                         <th>
                                 <div class="field">
-                                            <input  id="{{ $review->id }}" type="checkbox" name="switch" class="switch" checked route="{{ route('review.permit.off' , $review->id) }}">
+                                            <input  id="{{ $review->id }}" type="checkbox" name="switch" class="switch"  v-on:click="switchOff"  checked route="{{ route('review.permit.off' , $review->id) }}">
                                             <label for="{{ $review->id }}" ></label>
                                 </div>
                         </th>
@@ -63,13 +61,13 @@
                        </th>
                         <th>
                                 <div class="field">
-                                            <input  id="{{ $review->id }}" type="checkbox" class="switch"  name="switch" route="{{ route('review.permit.on' , $review->id) }}">
+                                            <input  id="{{ $review->id }}" type="checkbox" class="switch"  name="switch" v-on:click="switchOn" route="{{ route('review.permit.on' , $review->id) }}">
                                             <label for="{{ $review->id }}" ></label>
                                 </div>
                         </th>
                    @endif
                         <th>
-                            <a href="{{ route('review.delete', $review->id ) }}"  id="deleteReview"  class="button is-danger">Delete</a>
+                            <button  id="deleteReview"  class="button is-danger" v-on:click="deleteReview" route="{{ route('review.delete' , $review->id) }}" >Delete</button>
                         </th>
                 </tr>
             @endforeach
@@ -90,18 +88,11 @@
 <script type="text/javascript">
     
  $(document).ready(function () {
-  
-
-    $('input[name="switch"]').on('click',function () {
-        
-      
-        if ( $(this).is(':checked')) {
+    $('input[name="switch"] , #deleteReview').on('click',function () {
                 var route = $(this).attr('route') ;
-                window.location.replace(route);
-        } else {
-             var route = $(this).attr('route') ;
-                window.location.replace(route);
-        }
+                $('.swal2-confirm').on('click',function (){
+                        window.location.replace(route);
+                  });
     });
 });
 </script>
