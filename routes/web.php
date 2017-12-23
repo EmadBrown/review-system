@@ -1,4 +1,6 @@
 <?php
+use App\Review;
+use App\Http\Resources\ReviewResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +52,7 @@ Route::group(['prefix' => 'reivew', 'namespace' => 'Web'], function () {
  
 });
 
+ 
+Route::get('/json', function () {
+    return new ReviewResource(Review::all());
+});
