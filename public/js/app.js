@@ -11805,10 +11805,6 @@ var app = new Vue({
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
-      }).then(function (result) {
-        if (result.value) {
-          __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Deleted!', 'Your file has been deleted.', 'success');
-        }
       });
     }
   },
