@@ -7,6 +7,7 @@
               <a  href="{{ route('review.add') }}" class="button is-primary is-block is-alt is-large column is-3">Add Review</a>
       </div>
 </div>
+<div id='app'>
  @foreach ($reviews as $review )
    <div class="column is-12">
            <div class="box content">
@@ -20,7 +21,7 @@
                  </div>
                  <div class="media-content">
                    <div class="content">
-                     <p>
+                       <p>
                        <a href="#">@star</a>
                                                       <star-rating :show-rating="false"  :rating="{{$review->rating}}" :star-size="30" ></star-rating>
                        <span class="tag">Rating</span>
@@ -30,9 +31,10 @@
                </div>
              </article>
            </div>
+   </div>
  @endforeach
- 
-</div>  
+   </div>
+  
  
 <!-- Pagination -->
  <pagination v-bind:pagedata="tagsData" v-on:page-clicked="getTagsList"></pagination>

@@ -29,7 +29,7 @@
         </div>
 
         <div class="field is-grouped">
-            <div class="control">
+            <div id="app" class="control">
                    <star-rating :show-rating="false" @rating-selected="setRating" :star-size="30" ></star-rating>
                    <input  type="hidden" name="rating" v-bind:value="rating" required autofocus>
                     @if ($errors->has('rating'))
@@ -50,4 +50,6 @@
         </div>
 
     </form>
+
 @endsection
+

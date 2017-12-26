@@ -14,11 +14,10 @@
       
         @include('partials._messages')
     
-        <div id='app'>
+
         
             @yield('content')     
 
-       </div> 
        
   </section>
    

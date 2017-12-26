@@ -14,11 +14,8 @@
       
     @include('layouts.partials._messages')
     
-    <div id='app'>
         
          @yield('content')     
-        
-    </div>
     
   </section>
    

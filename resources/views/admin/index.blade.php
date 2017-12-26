@@ -9,6 +9,7 @@
 
 @section('content')
 
+<div id="app"> 
 <table class="table">
     <thead>
         <tr>
@@ -16,22 +17,24 @@
                 <th><abbr title="Position">Name</abbr></th>
                 <th><abbr title="Played">Description</abbr></th>
                 <th>Rating</th>
-                <th>Premition</th>
+                <th>Permission</th>
                 <th>Switching </th>
                 <th>Delete</th>
         </tr>
     </thead>
+    
     <tfoot>
             <tr>
                 <th>#</th>
                 <th><abbr title="Position">Name</abbr></th>
                 <th><abbr title="Played">Description</abbr></th>
                 <th>Rating</th>
-                <th>Premition</th>
+                <th>Permission</th>
                 <th>Switching </th>
                 <th>Delete</th>
             </tr>
     </tfoot>
+    
     <tbody>
         @foreach($reviews as $review)
             <tr>
@@ -72,8 +75,8 @@
                 </tr>
             @endforeach
     </tbody>
-   
 </table>
+</div>
 <!-- Pagination -->
  <pagination v-bind:pagedata="tagsData" v-on:page-clicked="getTagsList"></pagination>
     <nav class="is-centered" role="navigation" aria-label="pagination">

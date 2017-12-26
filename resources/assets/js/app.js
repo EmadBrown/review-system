@@ -5,19 +5,19 @@ window.Vue = require('vue');
 
 // ES6 Modules or TypeScript
 import swal from 'sweetalert2'
-Vue.use(swal);
 
 import Buefy from 'buefy'
 Vue.use(Buefy);
 
-import Router from './routes.js'
+import StarRating from 'vue-star-rating'
+ Vue.component('star-rating', StarRating);
  
+import Router from './routes.js'
+
 
 Vue.component('example', require('./components/example.vue'));
+Vue.component('slugWidget', require('./components/slugWidget.vue'));
 
-import StarRating from 'vue-star-rating'
- 
-Vue.component('star-rating', StarRating);
 
  var app = new Vue({
    el: '#app',
@@ -57,7 +57,7 @@ Vue.component('star-rating', StarRating);
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
               })
-    }
+        }
   },
   data: {
     rating: "No Rating Selected",
@@ -65,6 +65,7 @@ Vue.component('star-rating', StarRating);
     currentSelectedRating: "No Current Rating",
     boundRating: 3
   }
+  
  });
 
   

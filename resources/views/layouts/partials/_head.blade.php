@@ -9,8 +9,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
-    <!-- Sweet Alert -->
-<link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
+ 
     
 
