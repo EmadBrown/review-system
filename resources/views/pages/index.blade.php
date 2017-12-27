@@ -35,7 +35,6 @@
  @endforeach
    </div>
   
- 
 <!-- Pagination -->
  <pagination v-bind:pagedata="tagsData" v-on:page-clicked="getTagsList"></pagination>
     <nav class="is-centered" role="navigation" aria-label="pagination">
@@ -43,5 +42,19 @@
         <a  href="{{ $reviews->nextPageUrl() }}" class="pagination-next">Next page</a>
    </nav>
  
+
+@endsection
+
+@section('script')
+
+<!--<script >
+    var test = new Vue({
+   el: '#test',
+   data:{
+       test: {{ route('review.add') }}
+   }
+   
+   });
+</script>-->
 
 @endsection

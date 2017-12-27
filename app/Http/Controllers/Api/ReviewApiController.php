@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Service\ReviewApiService;
 
 
-
 class ReviewApiController extends Controller
 {
     /**
@@ -29,6 +28,15 @@ class ReviewApiController extends Controller
      * @return json
      */
     public function index() 
+    {
+        return $this->reviewApiService->getData();
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getData() 
     {
         return $this->reviewApiService->getData();
     }

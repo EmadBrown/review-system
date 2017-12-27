@@ -17,7 +17,7 @@
                 <th><abbr title="Position">Name</abbr></th>
                 <th><abbr title="Played">Description</abbr></th>
                 <th>Rating</th>
-                <th>Permission</th>
+<!--                <th>Permission</th>-->
                 <th>Switching </th>
                 <th>Delete</th>
         </tr>
@@ -29,7 +29,7 @@
                 <th><abbr title="Position">Name</abbr></th>
                 <th><abbr title="Played">Description</abbr></th>
                 <th>Rating</th>
-                <th>Permission</th>
+<!--                <th>Permission</th>-->
                 <th>Switching </th>
                 <th>Delete</th>
             </tr>
@@ -38,42 +38,45 @@
     <tbody>
         @foreach($reviews as $review)
             <tr>
-              <th>{{ $review->id }}</th>
+                      <th>{{ $review->id }}</th>
               <th>{{ $review->name }}</th>
               <th>{{ $review->description }}</th>
                 <th> 
                         <star-rating :show-rating="false"  :rating="{{$review->rating}}" :star-size="15" ></star-rating>
                 </th>
               @if($review->permit == true)
-                        <th>
+<!--                        <th>
                                  <span class="icon has-text-success">
                                        <i class="fa fa-check-square"></i>
                                 </span>
-                        </th>
+                        </th>-->
                         <th>
                                 <div class="field">
-                                            <input  id="{{ $review->id }}" type="checkbox" name="switch" class="switch"  v-on:click="switchOff"  checked route="{{ route('review.permit.off' , $review->id) }}">
+                                            <input  id="{{ $review->id }}" type="checkbox" name="switch" class="switch"  v-on:click="switchOff('{{ route('review.permit.off' , $review->id) }}')"  checked route="{{ route('review.permit.off' , $review->id) }}">
                                             <label for="{{ $review->id }}" ></label>
                                 </div>
                         </th>
                    @else
-                        <th>
+<!--                        <th>
                                 <span class="icon has-text-danger">
                                     <i class="fa fa-ban"></i>
                                 </span>
-                       </th>
+                       </th>-->
                         <th>
                                 <div class="field">
-                                            <input  id="{{ $review->id }}" type="checkbox" class="switch"  name="switch" v-on:click="switchOn" route="{{ route('review.permit.on' , $review->id) }}">
+                                            <input  id="{{ $review->id }}" type="checkbox" class="switch"  name="switch" v-on:click="switchOn('{{ route('review.permit.on' , $review->id) }}')">
                                             <label for="{{ $review->id }}" ></label>
                                 </div>
                         </th>
                    @endif
                         <th>
-                            <button  id="deleteReview"  class="button is-danger" v-on:click="deleteReview" route="{{ route('review.delete' , $review->id) }}" >Delete</button>
+                            <button  id="deleteReview"  class="button is-danger" v-on:click="deleteReview('{{ route('review.delete' , $review->id) }}')" >Delete</button>
                         </th>
                 </tr>
             @endforeach
+         
+<!--    <reviews></reviews>-->
+
     </tbody>
 </table>
 </div>
@@ -83,21 +86,22 @@
         <a  href="{{$reviews->previousPageUrl()}}" class="pagination-previous">Previous</a>
         <a  href="{{ $reviews->nextPageUrl() }}" class="pagination-next">Next page</a>
    </nav>
+<!--    <template id="reviews-template">
+        <ul>
+                <li  v-for="review in list">
+            
+                             @{{review.name}}
+       
+    </li>
+
+            
+        </ul>
+
+</template>-->
+
+ 
 
 
 @endsection
 
-@section('script')
-<script type="text/javascript">
-    
- $(document).ready(function () {
-    $('input[name="switch"] , #deleteReview').on('click',function () {
-                var route = $(this).attr('route') ;
-                $('.swal2-confirm').on('click',function (){
-                        window.location.replace(route);
-                  });
-    });
-});
-</script>
-
-@endsection
+ 

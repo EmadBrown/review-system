@@ -3,6 +3,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+ 
 // ES6 Modules or TypeScript
 import swal from 'sweetalert2'
 
@@ -12,16 +13,37 @@ Vue.use(Buefy);
 import StarRating from 'vue-star-rating'
  Vue.component('star-rating', StarRating);
  
-import Router from './routes.js'
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
 
+import VueRouter from 'vue-router'
+Vue.use(VueRouter);
 
 Vue.component('example', require('./components/example.vue'));
-Vue.component('slugWidget', require('./components/slugWidget.vue'));
 
+var router = new VueRouter();
+
+Vue.component('reviews' , {
+    template: '#reviews-template',
+ 
+ data: function(){
+     return {
+         list: []
+     };
+ },
+    created: function(){
+      
+            $.getJSON('api#/dashboard' , function(reviews){
+                this.list = reviews;
+            }.bind(this));
+        
+    }
+});
 
  var app = new Vue({
    el: '#app',
-   router: Router,
+   resource: VueResource,
+   
   methods: {
     setRating: function(rating) {
       this.rating = rating ;
@@ -32,32 +54,46 @@ Vue.component('slugWidget', require('./components/slugWidget.vue'));
     setCurrentSelectedRating: function(rating) {
       this.currentSelectedRating = "You have Selected: " + rating + " stars";
     },
-    switchOn (){
+    switchOn: function(routes){
                 swal(
-                            'Review has given permission On!',
-                            'Click the button "OK"! to continue ',
+                            'Review has given permission On successfully!',
+                            'Click the button "OK"!',
                             'success'
-                      )
+                      );
+                    this.$http.get(routes);
+
     },
-    switchOff (){
+    switchOff: function(routes){
                 swal(
-                            'Review has given permission Off!',
-                            'Click the button "OK"! to continue ',
+                            'Review has given permission Off successfully!',
+                            'Click the button "OK"!',
                             'success'
-                          )
+                          );
+                    this.$http.get(routes);
     },
-    deleteReview(){
-        
-        swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-              })
-        }
+    deleteReview: function(routes){
+                    swal({
+                             title: 'Are you sure?',
+                             text: "You won't be able to revert this!",
+                             type: 'warning',
+                             showCancelButton: true,
+                             confirmButtonColor: '#3085d6',
+                             cancelButtonColor: '#d33',
+                             confirmButtonText: 'Yes, delete it!'
+                           }).then((result) => {
+                             if (result.value) {
+                               swal(
+                                 'Deleted!',
+                                 'Your file has been deleted.',
+                                 'success'
+                               );
+                          this.$http.get(routes);
+                             }
+                           });
+                }
+  },
+  routing(){
+       
   },
   data: {
     rating: "No Rating Selected",
