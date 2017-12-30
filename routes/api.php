@@ -17,8 +17,5 @@ use Illuminate\Http\Request;
    
 Route::middleware('api')->group( function () {
             Route::get( '/' , 'Api\ReviewApiController@index')->name('home');
-            Route::get( '/dashboard' , 'Api\DashboardApiController@index');
-
 });
-
 

@@ -1012,12 +1012,47 @@ Vue.component('reviews', {
       list: []
     };
   },
+  methods: {
+    fetchReviewList: function fetchReviewList() {
+      $.getJSON('json/dashboard', function (reviews) {
+        this.list = reviews;
+      }.bind(this));
+    },
+    switchOn: function switchOn(id) {
+      __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Review has given permission On successfully!', 'Click the button "OK"!', 'success');
+      this.$http.get('dashboard/permit_on/' + id);
+    },
+    switchOff: function switchOff(id) {
+      __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Review has given permission Off successfully!', 'Click the button "OK"!', 'success');
+      this.$http.get('dashboard/permit_off/' + id);
+    },
+    deleteReview: function deleteReview(id) {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Deleted!', 'Your file has been deleted.', 'success');
+          _this.$http.get('dashboard/delete/' + id);
+          _this.fetchReviewList();
+        }
+      });
+    }
+  },
   created: function created() {
 
-    $.getJSON('api#/dashboard', function (reviews) {
+    $.getJSON('json/dashboard', function (reviews) {
       this.list = reviews;
     }.bind(this));
   }
+
 });
 
 var app = new Vue({
@@ -1042,8 +1077,8 @@ var app = new Vue({
       __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Review has given permission Off successfully!', 'Click the button "OK"!', 'success');
       this.$http.get(routes);
     },
-    deleteReview: function deleteReview(routes) {
-      var _this = this;
+    deleteReview: function deleteReview() {
+      var _this2 = this;
 
       __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
         title: 'Are you sure?',
@@ -1056,12 +1091,11 @@ var app = new Vue({
       }).then(function (result) {
         if (result.value) {
           __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Deleted!', 'Your file has been deleted.', 'success');
-          _this.$http.get(routes);
+          _this2.$http.get('dashboard/delete/' + id);
         }
       });
     }
   },
-  routing: function routing() {},
 
   data: {
     rating: "No Rating Selected",

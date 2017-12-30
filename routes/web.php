@@ -52,7 +52,5 @@ Route::group(['prefix' => 'reivew', 'namespace' => 'Web'], function () {
  
 });
 
+Route::get( 'json/dashboard' , 'Api\DashboardApiController@index');
  
-Route::get('/json', function () {
-    return new ReviewResource(Review::all());
-});

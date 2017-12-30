@@ -31,13 +31,58 @@ Vue.component('reviews' , {
          list: []
      };
  },
+   methods: {
+   fetchReviewList: function() {
+                     $.getJSON('json/dashboard' , function(reviews){
+                        this.list = reviews;
+                    }.bind(this));
+        },
+    switchOn: function(id){
+                swal(
+                            'Review has given permission On successfully!',
+                            'Click the button "OK"!',
+                            'success'
+                      );
+                    this.$http.get('dashboard/permit_on/'+ id);
+
+    },
+    switchOff: function(id){
+                swal(
+                            'Review has given permission Off successfully!',
+                            'Click the button "OK"!',
+                            'success'
+                          );
+                    this.$http.get('dashboard/permit_off/'+ id);
+    },
+    deleteReview: function(id){
+                    swal({
+                             title: 'Are you sure?',
+                             text: "You won't be able to revert this!",
+                             type: 'warning',
+                             showCancelButton: true,
+                             confirmButtonColor: '#3085d6',
+                             cancelButtonColor: '#d33',
+                             confirmButtonText: 'Yes, delete it!'
+                           }).then((result) => {
+                             if (result.value) {
+                               swal(
+                                 'Deleted!',
+                                 'Your file has been deleted.',
+                                 'success'
+                               );
+                          this.$http.get('dashboard/delete/'+ id);
+                          this.fetchReviewList();
+                             }
+                           });
+                }
+  },
     created: function(){
       
-            $.getJSON('api#/dashboard' , function(reviews){
-                this.list = reviews;
+            $.getJSON('json/dashboard' , function(reviews){
+           this.list = reviews;
             }.bind(this));
-        
     }
+    
 });
 
  var app = new Vue({
@@ -71,7 +116,7 @@ Vue.component('reviews' , {
                           );
                     this.$http.get(routes);
     },
-    deleteReview: function(routes){
+    deleteReview: function(){
                     swal({
                              title: 'Are you sure?',
                              text: "You won't be able to revert this!",
@@ -87,14 +132,12 @@ Vue.component('reviews' , {
                                  'Your file has been deleted.',
                                  'success'
                                );
-                          this.$http.get(routes);
+                          this.$http.get('dashboard/delete/'+ id);
                              }
                            });
                 }
   },
-  routing(){
-       
-  },
+ 
   data: {
     rating: "No Rating Selected",
     currentRating: "No Rating",

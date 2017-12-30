@@ -4,9 +4,9 @@
 
  use App\Review;
 
-class ReviewApiService{
-    
-    
+class ReviewApiService
+ {
+       
     /**
      * @var Review Model 
      */

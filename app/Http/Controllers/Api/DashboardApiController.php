@@ -30,7 +30,7 @@ class DashboardApiController extends Controller
      */
     public function index() 
     {
-            return view('admin.index')->withReviews($this->adminService->getData());
+            return $this->adminService->getData();
     }
     
 }
