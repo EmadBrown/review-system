@@ -38,21 +38,25 @@ Vue.component('reviews' , {
                     }.bind(this));
         },
     switchOn: function(id){
+                this.$http.get('dashboard/permit_on/'+ id);
+                  this.fetchReviewList();
                 swal(
                             'Review has given permission On successfully!',
                             'Click the button "OK"!',
                             'success'
                       );
-                    this.$http.get('dashboard/permit_on/'+ id);
-
+                   
+                this.fetchReviewList();
     },
     switchOff: function(id){
+                 this.$http.get('dashboard/permit_off/'+ id);
+                 this.fetchReviewList();
                 swal(
                             'Review has given permission Off successfully!',
                             'Click the button "OK"!',
                             'success'
                           );
-                    this.$http.get('dashboard/permit_off/'+ id);
+                this.fetchReviewList();
     },
     deleteReview: function(id){
                     swal({
@@ -65,15 +69,16 @@ Vue.component('reviews' , {
                              confirmButtonText: 'Yes, delete it!'
                            }).then((result) => {
                              if (result.value) {
+                             this.$http.get('dashboard/delete/'+ id);
                                swal(
                                  'Deleted!',
                                  'Your file has been deleted.',
                                  'success'
                                );
-                          this.$http.get('dashboard/delete/'+ id);
-                          this.fetchReviewList();
+                          this.fetchReviewList(); 
                              }
                            });
+                           this.fetchReviewList();
                 }
   },
     created: function(){

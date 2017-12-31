@@ -1019,12 +1019,17 @@ Vue.component('reviews', {
       }.bind(this));
     },
     switchOn: function switchOn(id) {
-      __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Review has given permission On successfully!', 'Click the button "OK"!', 'success');
       this.$http.get('dashboard/permit_on/' + id);
+      this.fetchReviewList();
+      __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Review has given permission On successfully!', 'Click the button "OK"!', 'success');
+
+      this.fetchReviewList();
     },
     switchOff: function switchOff(id) {
-      __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Review has given permission Off successfully!', 'Click the button "OK"!', 'success');
       this.$http.get('dashboard/permit_off/' + id);
+      this.fetchReviewList();
+      __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Review has given permission Off successfully!', 'Click the button "OK"!', 'success');
+      this.fetchReviewList();
     },
     deleteReview: function deleteReview(id) {
       var _this = this;
@@ -1039,11 +1044,12 @@ Vue.component('reviews', {
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Deleted!', 'Your file has been deleted.', 'success');
           _this.$http.get('dashboard/delete/' + id);
+          __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Deleted!', 'Your file has been deleted.', 'success');
           _this.fetchReviewList();
         }
       });
+      this.fetchReviewList();
     }
   },
   created: function created() {

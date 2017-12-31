@@ -26,6 +26,7 @@
                             <th><abbr title="Position">Name</abbr></th>
                             <th><abbr title="Played">Description</abbr></th>
                             <th>Rating</th>
+                            <th>permission </th>
                             <th>Switching </th>
                             <th>Delete</th>
                     </tr>
@@ -37,7 +38,8 @@
                             <th><abbr title="Position">Name</abbr></th>
                             <th><abbr title="Played">Description</abbr></th>
                             <th>Rating</th>
-                            <th>Switching </th>
+                            <th>Permation</th>
+                            <th>permission </th>
                             <th>Delete</th>
                         </tr>
                 </tfoot>
@@ -51,18 +53,28 @@
                                    <th> 
                                            <star-rating :show-rating="false"  :rating="review.rating" :star-size="15" ></star-rating>
                                    </th>
-                                   <th v-if="review.permit === 1">
-                                           <div class="field">
+                                       <th v-if="review.permit === 1">
+                                              <span class="icon has-text-success">
+                                                  <i class="fa fa-check-square"></i>
+                                             </span>
+                                       </th>
+                                        <th v-else>
+                                                <span class="icon has-text-danger">
+                                                  <i class="fa fa-ban"></i>
+                                           </span>
+                                       </th>
+                                       <th v-if="review.permit === 1">
+                                              <div class="field">
                                                    <input  :id="review.id" type="checkbox" name="switch" class="switch"  checked v-on:click="switchOff(review.id)">
                                                    <label :for="review.id" ></label>
-                                           </div>
-                                   </th>
-                                   <th v-else>
-                                           <div class="field">
-                                                   <input  :id="review.id" type="checkbox" class="switch"  name="switch"  v-on:click="switchOn(review.id)">
-                                                   <label :for="review.id" ></label>
-                                           </div>
-                                   </th>
+                                            </div>
+                                       </th>
+                                        <th v-else>
+                                            <div class="field">
+                                                    <input  :id="review.id" type="checkbox" class="switch"  name="switch"  v-on:click="switchOn(review.id)">
+                                                    <label :for="review.id" ></label>
+                                            </div>
+                                       </th>
                                    <th>
                                           <button  id="deleteReview"  class="button is-danger" v-on:click="deleteReview(review.id)" >Delete</button>
                                    </th>
