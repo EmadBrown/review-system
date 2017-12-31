@@ -19,7 +19,8 @@ Vue.component('example', require('./components/example.vue'));
 
 var router = new VueRouter();
 
-Vue.component('reviews', require('./components/dashboardReviewList.vue'));
+Vue.component('reviews', require('./components/dashboard.vue'));
+Vue.component('reviews-permit', require('./components/index.vue'));
 
 
  var app = new Vue({

@@ -28,7 +28,7 @@ class ReviewApiService
      */
     public function getData()
     {
-         $data = $this->reivewModel::select('name' , 'description' , 'rating')->Where('permit' , '=' , 1)->orderBy('created_at'  ,  'desc')->paginate(5);
+         $data = $this->reivewModel::select('name' , 'description' , 'rating')->Where('permit' , '=' , 1)->orderBy('created_at'  ,  'desc')->get();
          return response()->json($data);
     } 
 }
