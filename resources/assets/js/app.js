@@ -23,6 +23,7 @@ Vue.component('reviews', require('./components/dashboard.vue'));
 Vue.component('reviews-permit', require('./components/index.vue'));
 
 
+
  var app = new Vue({
    el: '#app',
    resource: VueResource,

@@ -63,13 +63,21 @@
                            </tr>
                    </tbody>
         </table>
+             <vue-pagination  :pagination="list"
+  
+                     :offset="4">
+    </vue-pagination>
 </template>
 
  
 
 <script>
-import swal from 'sweetalert2'
-    export default {
+import swal from 'sweetalert2';
+import vue-pagination from 'pagination';
+
+    components:{
+         'pagination': vue-pagination;
+    }
  
  
  data: function(){

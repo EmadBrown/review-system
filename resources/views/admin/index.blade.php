@@ -12,6 +12,7 @@
 <div id="app"> 
  
             <reviews></reviews>
+
 </div>
 
 @endsection
