@@ -1,6 +1,7 @@
  
 
  <template>
+ <div class="countiner">
         <table class="table">
                 <thead>
                     <tr>
@@ -28,7 +29,7 @@
 
                 <tbody>
 
-                           <tr v-for="review in list">
+                           <tr v-for="review in list.data">
                                    <th> {{review.id}}</th>
                                    <th> {{review.name}}</th>
                                    <th> {{review.description }}</th>
@@ -61,34 +62,61 @@
                                           <button  id="deleteReview"  class="button is-danger" v-on:click="deleteReview(review.id)" >Delete</button>
                                    </th>
                            </tr>
-                   </tbody>
+                   </tbody> 
         </table>
-             <vue-pagination  :pagination="list"
-  
-                     :offset="4">
-    </vue-pagination>
+
+    <div>
+        <hr>
+            <nav>
+              <ul class="pagination">
+                <li class="page-item" v-bind:class="{disabled: list.current_page === 1}">
+                  <a class="page-link" href="#"  v-on:click="prevPage">Previous</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#">{{list.current_page}}<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="page-item" v-bind:class="{disabled: list.current_page === list.last_page}">
+                  <a class="page-link" href="#" v-on:click="nextPage">Next</a>
+                </li>
+              </ul>
+            </nav>
+          <hr>
+    </div>
+
+</div>
+
 </template>
 
  
 
 <script>
-import swal from 'sweetalert2';
-import vue-pagination from 'pagination';
+import swal from 'sweetalert2'
+ 
 
-    components:{
-         'pagination': vue-pagination;
-    }
- 
- 
+export default {
+
  data: function(){
      return {
          list: []
-     };
- },
- 
+     }
+},
    methods: {
+   nextPage: function() {
+                     $.getJSON(this.list.next_page_url , function(reviews){
+                        this.list = reviews;
+                    }.bind(this));
+        },
+
+
+   prevPage: function() {
+                     $.getJSON('json/dashboard?page=' + (this.list.current_page-1) , function(reviews){
+                        this.list = reviews;
+                    }.bind(this));
+        },
+
    fetchReviewList: function() {
-                     $.getJSON('json/dashboard' , function(reviews){
+                     $.getJSON('json/dashboard?page=' + this.list.current_page , function(reviews){
                         this.list = reviews;
                     }.bind(this));
         },

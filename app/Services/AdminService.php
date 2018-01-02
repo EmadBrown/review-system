@@ -29,7 +29,7 @@ class AdminService
      */
     public function getData() 
     {
-         $data = $this->reviewModel::all();
+         $data = $this->reviewModel::paginate(10);
          return response()->json($data);
     }
 }
